@@ -11,6 +11,6 @@ router.get('/sign-in',usersController.signIn);
 //posting the form data to the server
 
 router.post('/create', usersController.create);
-
+router.post('/create-session',usersController.createSession);
 
 module.exports = router;

@@ -2,9 +2,24 @@
 const User = require('../models/user');
 
 module.exports.profile = function(req,res){
-    return res.render('users',{
-        title:"Users"
-    });
+    if(req.cookies.user_id){
+        User.findById(req.cookies.user_id)
+        .then( user => {
+            if(user){
+                return res.render('user_profile',{
+                    title: "user profile",
+                    user:user
+                });
+            }else{
+                return res.redirect('/users/sign-in');
+            }
+            
+        })
+       
+    }else{
+        return res.redirect('/users/sign-in');
+    }
+   
 };
 module.exports.name = function(req,res){
     return res.end("<h1>USERS name</h1>");
@@ -44,24 +59,38 @@ module.exports.create = function(req, res){
         else{
             return res.redirect('back');
         }
+    })
+    .catch(err =>{
+        console.log('error in finding user in signing up'); 
+        return;
     });
-            
-   
 }
-// , function(err, user){
-//     if(err){console.log('error in finding user in signing up'); return}
 
-//     if (!user){
-//         User.create(req.body, function(err, user){
-//             if(err){console.log('error in creating user while signing up'); return}
-
-//             return res.redirect('/users/sign-in');
-//         })
-//     }else{
-//         return res.redirect('back');
-//     }
 
 //sign in and create a session for user
 module.exports.createSession = function(req,res){
-    //Todo later
+    //find the user
+    User.findOne({email: req.body.email}).then(user => {
+        //handle user found
+        if (user)
+        {
+            //handle password which doesn't match
+            if(user.password != req.body.password)
+            {
+                return res.redirect('back');
+            }
+            //handle session creation
+            res.cookie('user_id',user.id);
+            return res.redirect('/users/profile');
+        }else{
+             //handle user not found
+             return res.redirect('back');
+        }
+    })
+    .catch( err => {
+        console.log('error in creating user while signing in'); 
+        return;
+    });
+       
 }
+   
