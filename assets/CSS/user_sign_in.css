@@ -1,0 +1,85 @@
+.item1 {
+  grid-area: header;
+}
+
+.item2 {
+  grid-area: menu;
+}
+.item2 h1 {
+  height: inherit;
+  width: inherit;
+  position: relative;
+  animation-name: example;
+  animation-duration: 15s;
+  animation-timing-function: linear;
+  animation-delay: 2s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+@keyframes example {
+  0% {
+    color: red;
+    left: 300px;
+    top: 0px;
+  }
+  25% {
+    color: #16dbdb;
+    left: 150px;
+    top: 0px;
+  }
+  50% {
+    color: blue;
+    left: 0px;
+    top: 200px;
+  }
+  75% {
+    color: coral;
+    left: 0px;
+    top: 350px;
+  }
+  100% {
+    color: rgba(235, 12, 131, 0.823);
+    left: 100px;
+    top: 0px;
+  }
+}
+
+.grid-container {
+  height: 100%;
+  display: grid;
+  grid-template-areas: "menu menu menu header header header";
+  gap: 10px;
+  padding: 10px;
+  background-image: linear-gradient(#e66465, #9198e5);
+}
+
+.grid-container > div {
+  text-align: center;
+  padding: 20px;
+  font-size: 30px;
+}
+.grid-container > div #form {
+  display: contents;
+  margin: 5px;
+  background-color: yellow;
+  height: 200px;
+  width: 350px;
+}
+.grid-container > div input {
+  padding: 10px;
+  background-color: white;
+  margin-left: 5px;
+  outline: none;
+  border: none;
+}
+.grid-container > div button {
+  padding: 10px;
+  background-color: rgba(21, 167, 43, 0.823);
+  color: wheat;
+  border: none;
+}
+.grid-container > div button:hover {
+  box-shadow: 0px 0px 8px 5px #4CAF50;
+}
+
+/*# sourceMappingURL=user_sign_in.css.map */
