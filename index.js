@@ -15,8 +15,10 @@ const session = require('express-session');
 const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
 const MongoStore = require('connect-mongo');
-
-
+//require the connect-flash library
+const flash = require('connect-flash');
+//require the middleware created by us
+const customMware = require('./config/middleware');
 
 //use the data getting from post method
 app.use(express.urlencoded()); 
@@ -65,6 +67,10 @@ app.use(passport.session());
 
 app.use(passport.setAuthenticatedUser);
 
+//use the flash library after the session is used
+app.use(flash());
+//use the custom middleware 
+app.use(customMware.setFlash);
 //use router
 app.use('/',require('./routes/index'));
 
