@@ -13,13 +13,13 @@ module.exports.create =async function(req,res){
             });
             post.comments.push(comment);
             post.save();
-
+            req.flash('success','comment has added');
             return res.redirect('/');
             
         }
     
     }catch(err){
-        console.log('Error while creating a comment',err);
+        req.flash('error',err);
     }
 
 
