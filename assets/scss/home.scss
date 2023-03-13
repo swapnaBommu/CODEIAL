@@ -1,5 +1,4 @@
-#home-container{
-    background-color: yellowgreen;
+#home-continer{
     display: flex;
     #feed-posts{
         width: 70%;
@@ -7,6 +6,10 @@
     }
     #user-friends{
         width: 30%;
+        padding: 10px;
+        height:10%;
+        border-left: 1px solid gray;
+       
         
     }
 
