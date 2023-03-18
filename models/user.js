@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema({
         required:true
     },
     avatar:{
-        type:string
+        type:String
     }
 },{
     timestamps:true
@@ -31,9 +31,13 @@ let storage = multer.diskStorage({
     },
     filename: function (req, file, cb) {
       const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
-      cb(null, file.fieldname + '-' + uniqueSuffix)
+      cb(null, file.fieldname + '-' + uniqueSuffix);
     }
-  })
+  });
+
+  //static 
+  userSchema.statics.uploadedAvatar = multer({ storage: storage }).single('avatar');
+  userSchema.statics.avatarPath =  AVATAR_PATH;
 
 
 
