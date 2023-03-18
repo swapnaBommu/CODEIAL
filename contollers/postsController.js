@@ -29,10 +29,18 @@ module.exports.create = async  function(req,res){
 
 module.exports.deletePost = async function(req,res){
     
-    let post  = await Post.findByIdAndDelete(req.params.id);
+    let post  = await Post.findById(req.params.id);
     if(post.user == req.user.id){
-
+            Post.findByIdAndDelete(req.params.id);s
         let c = await Comment.deleteMany( {post:req.params.id});
+        if(req.xhr){
+            return res.status(200).json({
+                data: {
+                    postId:req.params.id
+                },
+                message: 'Post Deleted'
+            });
+        }
         req.flash('success','Post and assosiated comments deleted');
         return res.redirect('back');
 
