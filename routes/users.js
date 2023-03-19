@@ -22,4 +22,9 @@ router.post('/create-session',passport.authenticate(
 
 router.get('/sign-out',usersController.destroySession);
 
+//below route check the user info in google
+router.get('/auth/google',passport.authenticate('google', { scope: ['profile', 'email']}));
+//google fetches data from the datatbase and sends backs to the below callback url
+router.get('/auth/google/callback',passport.authenticate('google', { failureRedirect: '/users/sign-in'}),usersController.createSession);
+
 module.exports = router;
