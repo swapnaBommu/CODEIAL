@@ -22,6 +22,14 @@ const flash = require('connect-flash');
 //require the middleware created by us
 const customMware = require('./config/middleware');
 
+
+//reuire the socket.io for chat-engine development
+const chatServer = require('http').Server(app);
+const chatSockets = require('./config/chat_sockets').chatSockets(chatServer); 
+chatServer.listen(5000);
+console.log('chat server is listening to the port 5000');
+
+
 //use the data getting from post method
 app.use(express.urlencoded()); 
 //setting up the cookie parser
