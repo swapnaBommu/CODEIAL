@@ -29,7 +29,6 @@ module.exports.destory = async function(req,res){
     try{
         let comment = await  Comment.findById(req.params.id);
         if(comment.user == req.user.id){
-           console.log('inside if of destroy comment');
             let postId = comment.post;
             Comment.findByIdAndDelete(req.params.id);
             let post = await Post.findByIdAndUpdate(postId, { $pull : { comments : req.params.id}});

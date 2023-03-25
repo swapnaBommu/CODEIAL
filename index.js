@@ -1,5 +1,8 @@
+const dotenv = require('dotenv').config();
 //Require the express
 const express = require('express');
+const env = require('./config/environment');
+const logger = require('morgan');
 //require the cookie parser
 const cookieParser = require('cookie-parser');
 //require the express ejs layouts
@@ -35,9 +38,12 @@ app.use(express.urlencoded());
 //setting up the cookie parser
 app.use(cookieParser());
 
-app.use(express.static('assets'));
+app.use(express.static(env.asset_path));
 //make the upload path available to the browser
 app.use('/uploads',express.static(__dirname + '/uploads'));
+
+app.use(logger(env.morgan.mode, env.morgan.options));
+
 
 // use the express layouts before the routes are used because the routes will
 //load the ejs files in browser
@@ -51,7 +57,7 @@ app.set('layout extractScripts',true);
 app.use(session({
     name:'codeial',
     //TODO change the secret before deployment in production mode
-    secret:'something',
+    secret: env.session_cookie_key,
     saveUninitialized:false,
     resave:false,
     cookie:{
