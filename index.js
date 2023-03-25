@@ -8,6 +8,7 @@ const cookieParser = require('cookie-parser');
 //require the express ejs layouts
 //creting app for express
 const app = express();
+require('./config/view-helper')(app);
 //setting the port on which app needs to be run
 const port = 8000;
 const expresslayouts = require('express-ejs-layouts');

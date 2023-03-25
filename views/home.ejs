@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="/css/home.css">
+<link rel="stylesheet" href="<%= assetPath('CSS/home.css') %>">
 <div id="home-continer">
     <section id="feed-posts">
         <h4>Posts</h4>
@@ -34,9 +34,9 @@
     </section>
     <%- include('_chat-box') -%>
 </div>
-<script src="/js/home_posts.js"></script>
+<script src="<%= assetPath('JS/home_posts.js') %>"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.6.1/socket.io.js"></script>
-<script src="/js/chat_engine.js"></script>
+<script src="<%= assetPath('JS/chat_engine.js')%>"></script>
 <% if(locals.user){ %> 
 <script>
     new ChatEngine('user-chat-box','<%= locals.user.email %>');

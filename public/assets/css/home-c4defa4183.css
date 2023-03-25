@@ -1,0 +1,15 @@
+#home-continer {
+  display: flex;
+}
+#home-continer #feed-posts {
+  width: 70%;
+  padding: 10px;
+}
+#home-continer #user-friends {
+  width: 30%;
+  padding: 10px;
+  height: 10%;
+  border-left: 1px solid gray;
+}
+
+/*# sourceMappingURL=home.css.map */
